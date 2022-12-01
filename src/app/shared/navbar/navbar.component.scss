@@ -1,0 +1,49 @@
+::ng-deep .mat-menu-panel {
+  height: fit-content;
+  overflow: hidden;
+  margin-top: 19px;
+  width: 150px;
+
+  padding: 0;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+
+.mat-badge-medium.mat-badge-above .mat-badge-content {
+  top: -5px;
+}
+.border-color {
+  border-color: #0b0664;
+}
+
+.text-color {
+  color: #0b0664;
+}
+.new-text {
+  color: #2245a3;
+}
+.navbar {
+  z-index: 9;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+.nav-class {
+  height: 10.3vh;
+}
+.svg-icon {
+  width: 2em;
+  height: 2em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+  fill: #88bd24;
+}
+
+.svg-icon circle {
+  stroke: #88bd24;
+  stroke-width: 1;
+}
