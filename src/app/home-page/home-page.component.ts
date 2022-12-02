@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -49,7 +50,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     new Date('12/25/2020'),
   ];
   dateFromData: any[] = [];
-  constructor(private store: Store) {}
+  constructor(private store: Store, private datePipe: DatePipe) {}
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
@@ -59,87 +60,36 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.store.dispatch(getAllFlights());
     this.initForm();
     this.allFlights = this.store.select(selectAllFlights);
-
-    const num = '0012300';
-
-    const withoutLeading0 = parseInt(num, 10);
-    console.log(withoutLeading0);
-    // this.myHolidayFilter = (d: Date) => {
-    //   console.log(d?.getDate());
-
-    //   return this.myHolidayDates.indexOf(+d?.getDate().toString()) == -1;
-    // };
-
-    // this.myHolidayFilter = (d: Date): any => {
-    //   const time = d?.getTime();
-    //   console.log(time);
-
-    //   return !this.myHolidayDates.find((x) => x?.getTime() == time);
-    // };
-    // console.log(this.myHolidayDates);
-
-    // const currentYear = new Date().getFullYear();
-    // console.log('currentYear=', currentYear);
-
-    // this.minDate = new Date(currentYear - 20, 0, 1);
-    // this.maxDate = new Date(currentYear + 1, 11, 31);
-    // console.log('minDate=', this.minDate);
-    // console.log('maxDate=', this.maxDate);
   }
-  temp;
-  removeLeadingZeros: any[] = [];
-  myFilter = (d: Date): any => {
-    let day = d?.getDate();
 
-    // console.log(day);
+  uniqueDates: any[] = [];
+  myFilter = (d: Date): any => {
+    let day = d?.toJSON().substring(0, 10);
+    console.log(day);
     //console.log(this.dateFromData);
     this.allFlights
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((data: any) => {
-        //   console.log(data);
-        let splitted = [];
-        let lastEl;
-        let uniqueDates = [];
-        for (let el of data.dateFrom) {
-          if (el !== undefined) {
-            lastEl = el.split('-');
-            console.log(el);
-            splitted.push(lastEl[2]);
-            uniqueDates = [...new Set(splitted)];
-            // lastEl = el.substring(6, 10);
-          }
-          //  splitted.push(lastEl);
-        }
-        // let removeLeadingZeros = uniqueDates.map((i) => i.replace('0', ''));
-        this.removeLeadingZeros = uniqueDates.map((i) => {
-          return parseInt(i, 10);
-        });
-        // let convertTostring = removeLeadingZeros.map((i) => i.toString());
-        console.log(day);
-        //  console.log(convertTostring);
+        let tempArray = data.dateFrom;
+        this.uniqueDates = [...new Set(tempArray)];
 
-        // for (let el of removeLeadingZeros) {
-        //   //  return day !== el;
-        // //  this.temp = el;
-        // }
+        console.log(this.uniqueDates);
       });
-    return this.removeLeadingZeros.some((el) => el == day);
-    // el = d?.getDate();
-    //  console.log(el);
+    return this.uniqueDates.some((el) => el == day);
   };
 
-  // myFilter = (dates: any) => {
-  //   // //  for(let el of dates.from){
-  //   // //   let newDay =
-  //   // //  }
-  //   // let newDays = dates?.dateFrom.map((el) => {
-  //   //   if (el && el !== undefined) {
-  //   //     return new Date(el).toJSON().substring(0, 10);
-  //   //   }
-  //   // });
-  //   // return newDays;
-  //   // console.log('newDays=', newDays);
-  // };
+  myFilter2 = (dates: any) => {
+    // //  for(let el of dates.from){
+    // //   let newDay =
+    // //  }
+    // let newDays = dates?.dateFrom.map((el) => {
+    //   if (el && el !== undefined) {
+    //     return new Date(el).toJSON().substring(0, 10);
+    //   }
+    // });
+    // return newDays;
+    // console.log('newDays=', newDays);
+  };
 
   initForm() {
     this.searchForm = new FormGroup({
@@ -149,6 +99,23 @@ export class HomePageComponent implements OnInit, OnDestroy {
       dateTo: new FormControl(null, [Validators.required]),
       seats: new FormControl('economy', [Validators.required]),
       passengers: new FormControl(null, [Validators.required]),
+    });
+    //  console.log(this.searchForm);
+
+    this.searchForm.get('dateFrom').valueChanges.subscribe((val) => {
+      const newDateFromVal = this.datePipe.transform(val, 'yyyy-MM-dd');
+      this.searchForm
+        .get('dateFrom')
+        .patchValue(newDateFromVal, { emitEvent: false });
+      console.log(this.searchForm.value.dateFrom);
+    });
+
+    this.searchForm.get('dateTo').valueChanges.subscribe((val) => {
+      const newDateToVal = this.datePipe.transform(val, 'yyyy-MM-dd');
+      this.searchForm
+        .get('dateTo')
+        .patchValue(newDateToVal, { emitEvent: false });
+      console.log(this.searchForm.value.dateTo);
     });
   }
 }
