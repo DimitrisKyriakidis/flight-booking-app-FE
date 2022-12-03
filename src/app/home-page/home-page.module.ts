@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from 'src/app/shared/modules/angular-material.module';
@@ -17,5 +17,6 @@ const routes = [{ path: '', component: HomePageComponent }];
     SharedModule,
   ],
   exports: [RouterModule],
+  providers: [DatePipe],
 })
 export class HomePageModule {}
