@@ -34,21 +34,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     dateTo: any[];
   }>;
   private unsubscribe$ = new Subject<void>();
-  minDate: Date;
-  maxDate: Date;
 
-  myHolidayDates: any = [
-    new Date(),
-    new Date('12/20/2020'),
-    new Date('12/17/2020'),
-    new Date('12/25/2020'),
-    new Date('12/4/2020'),
-    new Date('12/7/2020'),
-    new Date('12/12/2020'),
-    new Date('12/11/2020'),
-    new Date('12/26/2020'),
-    new Date('12/25/2020'),
-  ];
   dateFromData: any[] = [];
   constructor(private store: Store, private datePipe: DatePipe) {}
 
@@ -62,8 +48,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
     this.allFlights = this.store.select(selectAllFlights);
   }
 
-  uniqueDates: any[] = [];
+  // removeLeadingZeros: any[] = [];
+  // uniqueDates: any[] = [];
   myFilter = (d: Date): any => {
+    let uniqueDates = [];
     let day = d?.toJSON().substring(0, 10);
     console.log(day);
     //console.log(this.dateFromData);
@@ -71,11 +59,47 @@ export class HomePageComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((data: any) => {
         let tempArray = data.dateFrom;
-        this.uniqueDates = [...new Set(tempArray)];
+        uniqueDates = [...new Set(tempArray)];
 
-        console.log(this.uniqueDates);
+        console.log(uniqueDates);
       });
-    return this.uniqueDates.some((el) => el == day);
+    return uniqueDates.some((el) => el == day);
+
+    // let day = d?.getDate();
+    // // console.log(day);
+    // //console.log(this.dateFromData);
+    // this.allFlights
+    //   .pipe(takeUntil(this.unsubscribe$))
+    //   .subscribe((data: any) => {
+    //     //   console.log(data);
+    //     let splitted = [];
+    //     let lastEl;
+    //     let uniqueDates = [];
+    //     for (let el of data.dateFrom) {
+    //       if (el !== undefined) {
+    //         lastEl = el.split('-');
+    //         console.log(el);
+    //         splitted.push(lastEl[2]);
+    //         uniqueDates = [...new Set(splitted)];
+    //         // lastEl = el.substring(6, 10);
+    //       }
+    //       //  splitted.push(lastEl);
+    //     }
+    //     // let removeLeadingZeros = uniqueDates.map((i) => i.replace('0', ''));
+    //     this.removeLeadingZeros = uniqueDates.map((i) => {
+    //       return parseInt(i, 10);
+    //     });
+    //     // let convertTostring = removeLeadingZeros.map((i) => i.toString());
+    //     console.log(day);
+    //     //  console.log(convertTostring);
+    //     // for (let el of removeLeadingZeros) {
+    //     //   //  return day !== el;
+    //     // //  this.temp = el;
+    //     // }
+    //   });
+    // return this.removeLeadingZeros.some((el) => el == day);
+    // el = d?.getDate();
+    //  console.log(el);
   };
 
   myFilter2 = (dates: any) => {
