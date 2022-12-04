@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Flight } from 'src/app/shared/models/flight.models';
-import { User } from 'src/app/shared/models/user.model';
+import { SearchFlightFilters } from 'src/app/shared/models/searchFlightFilters';
 
 export const enum FlightsActionTypes {
   getAllFlights = '[Flights] get all flights',
@@ -21,5 +21,28 @@ export const getAllFlightsSuccess = createAction(
 
 export const getAllFlightsFail = createAction(
   FlightsActionTypes.getAllFlightsFail,
+  props<{ error: string }>()
+);
+
+export const searchFlights = createAction(
+  FlightsActionTypes.searchFlights,
+  props<{
+    filters: SearchFlightFilters;
+    // from: string;
+    // to: string;
+    // dateFrom: string;
+    // dateTo: string;
+    // seatType: string;
+    // passengers: number;
+  }>()
+);
+
+export const searchFlightsSuccess = createAction(
+  FlightsActionTypes.searchFlightsSuccess,
+  props<{ allFlights: any[] }>()
+);
+
+export const searchFlightsFlightsFail = createAction(
+  FlightsActionTypes.searchFlightsFail,
   props<{ error: string }>()
 );

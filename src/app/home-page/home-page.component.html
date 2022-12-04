@@ -18,6 +18,16 @@
                 >
               </mat-select>
             </mat-form-field>
+            <mat-errors
+              class="-mt-4"
+              *ngIf="
+                submitted ||
+                (searchForm.get('from').errors?.required &&
+                  searchForm.get('from').touched)
+              "
+            >
+              <span class="text-red-600 text-xs"> This field is required</span>
+            </mat-errors>
           </div>
 
           <div class="flex flex-col gap-2">
@@ -28,7 +38,7 @@
               <input
                 matInput
                 formControlName="dateFrom"
-                [matDatepickerFilter]="myFilter"
+                [matDatepickerFilter]="departureDatesFilter"
                 [matDatepicker]="picker"
               />
 
@@ -39,11 +49,27 @@
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
           </div>
+          <mat-errors
+            *ngIf="searchForm.errors?.invalidDateRange && searchForm.dirty"
+            class="-mt-8"
+          >
+            <span class="text-red-600 text-xs">
+              The departure date must be before the return date</span
+            >
+          </mat-errors>
+          <mat-errors
+            *ngIf="
+              submitted || (searchForm.errors?.required && searchForm.dirty)
+            "
+            class="-mt-8"
+          >
+            <span class="text-red-600 text-xs"> This field is required</span>
+          </mat-errors>
 
           <div class="flex flex-col">
             <h4 class="text-white">Seat</h4>
 
-            <mat-radio-group formControlName="seats">
+            <mat-radio-group formControlName="seatType">
               <div class="flex flex-col text-white gap-3">
                 <mat-radio-button value="economy">Economy</mat-radio-button>
                 <mat-radio-button value="premium">Premium</mat-radio-button>
@@ -66,6 +92,18 @@
               </mat-select>
             </mat-form-field>
           </div>
+
+          <mat-errors
+            class="-mt-8"
+            *ngIf="
+              submitted ||
+              (searchForm.get('to').errors?.required &&
+                searchForm.get('to').touched)
+            "
+          >
+            <span class="text-red-600 text-xs"> This field is required</span>
+          </mat-errors>
+
           <div class="flex flex-col gap-2">
             <h4 class="text-white"></h4>
             <mat-form-field class="" appearance="fill">
@@ -73,7 +111,7 @@
               <input
                 matInput
                 formControlName="dateTo"
-                [matDatepickerFilter]="myFilter2"
+                [matDatepickerFilter]="returnDatesFilter"
                 [matDatepicker]="picker2"
               />
 
@@ -88,14 +126,30 @@
           <div class="flex flex-col">
             <h4 class="text-white">Passengers</h4>
             <mat-form-field>
-              <input formControlName="passengers" type="number" matInput />
+              <input
+                formControlName="passengers"
+                type="number"
+                required
+                matInput
+              />
             </mat-form-field>
           </div>
+          <mat-errors
+            class="-mt-7"
+            *ngIf="
+              submitted ||
+              (searchForm.get('passengers').errors?.required &&
+                searchForm.get('passengers').touched)
+            "
+          >
+            <span class="text-red-600 text-xs"> This field is required</span>
+          </mat-errors>
         </div>
       </div>
 
       <div class="flex justify-center mt-5">
         <button
+          (click)="searchFlights()"
           class="inline-flex items-center rounded-sm border border-transparent bg-secondary px-10 py-2 text-sm font-medium text-white shadow-sm hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
         >
           Search

@@ -10,4 +10,17 @@ export class FlightService {
   getAllFlights() {
     return this.http.get(`${this.apiUrl}/getAllFlights`);
   }
+
+  searchFlights(from, to, dateFrom, dateTo, seatType, passengers) {
+    console.log(from);
+
+    return this.http.post(`${this.apiUrl}/searchFlights`, {
+      from,
+      to,
+      dateFrom,
+      dateTo,
+      seatType,
+      passengers,
+    });
+  }
 }

@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { FlightService } from 'src/app/services/flightService';
+import { SearchFlightFilters } from 'src/app/shared/models/searchFlightFilters';
 
 import { FlightsActionTypes } from './flights-actions';
 
@@ -26,6 +27,36 @@ export class FlightsEffects {
             return of({ type: FlightsActionTypes.getAllFlightsFail });
           })
         )
+      )
+    );
+  });
+
+  searchFlights$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FlightsActionTypes.searchFlights),
+      mergeMap((payload: SearchFlightFilters) =>
+        this.flightService
+          .searchFlights(
+            payload.filters.from,
+            payload.filters.to,
+            payload.filters.dateFrom,
+            payload.filters.dateTo,
+            payload.filters.seatType,
+            payload.filters.passengers
+          )
+          .pipe(
+            map((response) => {
+              console.log('filteredFlightsResponse=', response);
+
+              return {
+                type: FlightsActionTypes.searchFlightsSuccess,
+                filteredFlights: response['data'],
+              };
+            }),
+            catchError(() => {
+              return of({ type: FlightsActionTypes.searchFlightsFail });
+            })
+          )
       )
     );
   });
