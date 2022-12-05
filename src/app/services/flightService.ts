@@ -12,8 +12,6 @@ export class FlightService {
   }
 
   searchFlights(from, to, dateFrom, dateTo, seatType, passengers) {
-    console.log(from);
-
     return this.http.post(`${this.apiUrl}/searchFlights`, {
       from,
       to,

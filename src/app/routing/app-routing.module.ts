@@ -15,13 +15,21 @@ const routes: Routes = [
       import('../home-page/home-page.module').then((m) => m.HomePageModule),
   },
 
-  {
-    path: 'flight-results/:from/:to/:dateFrom/:dateTo/:seatType/:passengers',
-    loadChildren: () =>
-      import('../flight-results/flight-results.module').then(
-        (m) => m.FlightResultsModule
-      ),
-  },
+  // {
+  //   path: 'flight-results/:from/:to/:dateFrom/:dateTo/:seatType/:passengers',
+  //   loadChildren: () =>
+  //     import('../flight-results/flight-results.module').then(
+  //       (m) => m.FlightResultsModule
+  //     ),
+  // },
+
+  // {
+  //   path: 'filters-form',
+  //   loadChildren: () =>
+  //     import('../filters-form/filters-form.module').then(
+  //       (m) => m.FiltersFormModule
+  //     ),
+  // },
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
