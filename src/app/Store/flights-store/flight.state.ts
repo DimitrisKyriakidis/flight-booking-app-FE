@@ -7,7 +7,7 @@ export interface FlightState {
   dateFrom: string[];
   dateTo: string[];
   loading: boolean;
-  filteredFlights: [];
+  filteredFlights: any[];
 }
 
 export const initialFlightState: FlightState = {

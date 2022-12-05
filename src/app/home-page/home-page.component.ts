@@ -56,10 +56,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   initForm() {
     this.searchForm = new FormGroup(
       {
-        from: new FormControl(null, {
-          updateOn: 'blur',
-          validators: Validators.required,
-        }),
+        from: new FormControl(null, [Validators.required]),
         to: new FormControl(null, [Validators.required]),
         dateFrom: new FormControl(null),
         dateTo: new FormControl(null),

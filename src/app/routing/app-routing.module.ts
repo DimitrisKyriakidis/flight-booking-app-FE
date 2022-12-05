@@ -16,7 +16,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'flight-results',
+    path: 'flight-results/:from/:to/:dateFrom/:dateTo/:seatType/:passengers',
     loadChildren: () =>
       import('../flight-results/flight-results.module').then(
         (m) => m.FlightResultsModule

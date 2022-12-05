@@ -33,7 +33,7 @@ export const searchFlights = createAction(
 
 export const searchFlightsSuccess = createAction(
   FlightsActionTypes.searchFlightsSuccess,
-  props<{ filteredFlights: [] }>()
+  props<{ filteredFlights: any[] }>()
 );
 
 export const searchFlightsFlightsFail = createAction(
