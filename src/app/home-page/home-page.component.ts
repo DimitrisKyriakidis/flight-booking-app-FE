@@ -92,7 +92,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       this.transformDates(dateFromData);
     });
     return this.transformDates(dateFromData).some(
-      (el) => el == d.toDateString()
+      (el) => el == d?.toDateString()
     );
   };
 
@@ -103,7 +103,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
       dateToData = data?.dateTo;
       this.transformDates(dateToData);
     });
-    return this.transformDates(dateToData).some((el) => el == d.toDateString());
+    return this.transformDates(dateToData).some(
+      (el) => el == d?.toDateString()
+    );
   };
 
   transformDates(dates) {
@@ -112,14 +114,14 @@ export class HomePageComponent implements OnInit, OnDestroy {
     uniqueDates = [...new Set(tempArray)];
     uniqueDates = uniqueDates
       .map((i) => new Date(i))
-      .map((date) => date.toDateString());
+      .map((date) => date?.toDateString());
 
     return uniqueDates;
   }
 
   searchFlights() {
     this.submitted = true;
-    console.log(this.searchForm.value);
+    console.log(this.searchForm);
     if (this.searchForm.valid) {
       this.store.dispatch({
         type: FlightsActionTypes.searchFlights,

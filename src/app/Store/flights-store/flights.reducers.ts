@@ -1,6 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import { initialFlightState } from './flight.state';
-import { getAllFlights, getAllFlightsSuccess } from './flights-actions';
+import {
+  getAllFlights,
+  getAllFlightsSuccess,
+  searchFlights,
+  searchFlightsSuccess,
+} from './flights-actions';
 
 export const _flightsReducer = createReducer(
   initialFlightState,
@@ -16,12 +21,25 @@ export const _flightsReducer = createReducer(
 
     return {
       ...state,
-      isLoggedIn: false,
       allFlights: action.allFlights,
       from: [...new Set(from)],
       to: [...new Set(to)],
       dateFrom: action.allFlights.map((flight) => flight.dateFrom),
       dateTo: action.allFlights.map((flight) => flight.dateTo),
+    };
+  }),
+  on(searchFlights, (state) => {
+    return {
+      ...state,
+      loading: true,
+    };
+  }),
+
+  on(searchFlightsSuccess, (state, action) => {
+    return {
+      ...state,
+      loading: false,
+      filteredFlights: action.filteredFlights,
     };
   })
 );

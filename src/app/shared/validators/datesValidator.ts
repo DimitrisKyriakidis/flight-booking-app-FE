@@ -4,7 +4,7 @@ export function datesRangeValidator(): ValidatorFn {
   return (form: FormGroup): Validators | null => {
     const dateFrom = new Date(form.get('dateFrom').value);
     const dateTo = new Date(form.get('dateTo').value);
-    console.log(dateFrom.getFullYear(), dateTo);
+
     if (dateFrom.getFullYear() !== 1970 && dateTo.getFullYear() !== 1970) {
       const isRangeValid = dateTo?.getDate() - dateFrom?.getDate() > 0;
       return isRangeValid ? null : { invalidDateRange: true };

@@ -21,7 +21,7 @@
             <mat-errors
               class="-mt-4"
               *ngIf="
-                submitted ||
+                (submitted && searchForm.get('from').errors?.required) ||
                 (searchForm.get('from').errors?.required &&
                   searchForm.get('from').touched)
               "
@@ -59,7 +59,9 @@
           </mat-errors>
           <mat-errors
             *ngIf="
-              submitted || (searchForm.errors?.required && searchForm.dirty)
+              (submitted && dateFromControl.errors?.required) ||
+              (dateFromControl.errors?.required &&
+                (dateFromControl.dirty || dateFromControl.touched))
             "
             class="-mt-8"
           >
@@ -96,7 +98,7 @@
           <mat-errors
             class="-mt-8"
             *ngIf="
-              submitted ||
+              (submitted && searchForm.get('to').errors?.required) ||
               (searchForm.get('to').errors?.required &&
                 searchForm.get('to').touched)
             "
@@ -122,6 +124,16 @@
               <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
           </div>
+          <mat-errors
+            *ngIf="
+              (submitted && dateToControl.errors?.required) ||
+              (dateToControl.errors?.required &&
+                (dateToControl.dirty || dateToControl.touched))
+            "
+            class="-mt-8"
+          >
+            <span class="text-red-600 text-xs"> This field is required</span>
+          </mat-errors>
 
           <div class="flex flex-col">
             <h4 class="text-white">Passengers</h4>
@@ -137,7 +149,7 @@
           <mat-errors
             class="-mt-7"
             *ngIf="
-              submitted ||
+              (submitted && searchForm.get('passengers').errors?.required) ||
               (searchForm.get('passengers').errors?.required &&
                 searchForm.get('passengers').touched)
             "

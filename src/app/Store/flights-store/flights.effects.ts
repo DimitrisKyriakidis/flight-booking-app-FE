@@ -47,6 +47,7 @@ export class FlightsEffects {
           .pipe(
             map((response) => {
               console.log('filteredFlightsResponse=', response);
+              this.router.navigate(['/flight-results']);
 
               return {
                 type: FlightsActionTypes.searchFlightsSuccess,

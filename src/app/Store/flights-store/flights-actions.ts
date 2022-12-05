@@ -28,18 +28,12 @@ export const searchFlights = createAction(
   FlightsActionTypes.searchFlights,
   props<{
     filters: SearchFlightFilters;
-    // from: string;
-    // to: string;
-    // dateFrom: string;
-    // dateTo: string;
-    // seatType: string;
-    // passengers: number;
   }>()
 );
 
 export const searchFlightsSuccess = createAction(
   FlightsActionTypes.searchFlightsSuccess,
-  props<{ allFlights: any[] }>()
+  props<{ filteredFlights: [] }>()
 );
 
 export const searchFlightsFlightsFail = createAction(

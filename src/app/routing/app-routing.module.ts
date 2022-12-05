@@ -15,6 +15,14 @@ const routes: Routes = [
       import('../home-page/home-page.module').then((m) => m.HomePageModule),
   },
 
+  {
+    path: 'flight-results',
+    loadChildren: () =>
+      import('../flight-results/flight-results.module').then(
+        (m) => m.FlightResultsModule
+      ),
+  },
+
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
   { path: '**', redirectTo: '/', pathMatch: 'full' },

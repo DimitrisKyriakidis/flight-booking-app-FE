@@ -16,3 +16,8 @@ export const selectLoader = createSelector(
   flightState,
   (state) => state.loading
 );
+
+export const selectFilteredFlights = createSelector(
+  flightState,
+  (state) => state.filteredFlights
+);
