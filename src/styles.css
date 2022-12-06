@@ -9,3 +9,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --mainColor:#02122C;
     --secondColor:#00A698;
 }
+
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: var(--secondColor);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+
+  overflow-y: scroll;
+  background: var(--secondColor);
+  box-shadow: inset 0 0 4px #707070;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondColor);
+  border-radius: 10px;
+}

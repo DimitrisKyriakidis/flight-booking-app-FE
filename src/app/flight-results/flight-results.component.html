@@ -1,51 +1,118 @@
-<div
-  *ngFor="let element of filteredFlights | async"
-  class="mx-auto align-middle w-2/5 h-[15vh] mt-16 border border-secondary rounded-lg"
->
-  <div class="grid grid-cols-4 items-center h-full">
-    <div class="col-span-1">
-      <img [src]="element.image" class="w-36" />
+<div class="grid grid-cols-8 row-span-4">
+  <div class="col-span-2 flex">
+    <div class="filters-container bg-primary min-[1600px]:h-screen">
+      <app-filter-form #filterForm [resultsPageActive]="true"></app-filter-form>
+    </div>
+
+    <!-- breadcrumb -->
+    <div class="flex justify-between w-2/3">
+      <div class="flex text-center ml-4 mt-4 justify-start">
+        <a routerLink="/home-page">
+          <span
+            class="material-icons text-customBlue hover:text-gray-400 hover:underline cursor-pointer align-middle"
+          >
+            home
+          </span>
+        </a>
+        <span class="material-icons text-customBlue align-middle">
+          chevron_right
+        </span>
+
+        <a
+          [routerLink]="[
+            '/home-page/flight-results',
+            filters['from'],
+            filters['to'],
+            filters['dateFrom'],
+            filters['dateTo'],
+            filters['seatType'],
+            filters['passengers']
+          ]"
+        >
+          <span
+            class="text-customBlue hover:text-gray-400 hover:underline cursor-pointer align-middle"
+            >Results</span
+          >
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Results Dashboard  -->
+  <div class="col-span-6 flex flex-col justify-between mt-5">
+    <div class="flex w-5/6 justify-end">
+      <mat-form-field>
+        <mat-label class="text-customBlue">Order by</mat-label>
+        <mat-select (selectionChange)="sortData($event)" value="DESC">
+          <mat-option value="DESC">Expensivest price</mat-option>
+          <mat-option value="ASC">Cheapest price</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <div
-      class="col-span-2 flex justify-between items-center px-2 text-gray-500"
+      class="h-[72vh] w-2/3 mx-auto items-center mt-4 space-y-10 overflow-y-auto"
     >
-      <div class="flex justify-start">
-        <span>{{ element.from }}</span>
-      </div>
-      <div class="flex w-full justify-center items-center mr-2">
-        <div
-          class="flex flex-col justify-center items-center mb-7 ml-3 text-center w-full"
-        >
-          <p *ngIf="element.duration === 40" class="text-xs">
-            {{ element.duration }} minutes
-          </p>
-          <p *ngIf="element.duration !== 40" class="text-xs">
-            {{ element.duration }} hours
-          </p>
-          <div class="flex w-2/3 h-0.5 text-center rounded-full bg-gray-500">
-            <span></span>
+      <div
+        *ngFor="let element of filteredFlights | async"
+        class="mx-auto align-middle w-full h-[15vh] border border-secondary rounded-lg"
+      >
+        <div class="grid grid-cols-4 items-center h-full">
+          <div class="col-span-1">
+            <img [src]="element.image" class="w-36" />
+          </div>
+          <div
+            class="col-span-2 flex justify-between items-center px-2 text-gray-500"
+          >
+            <div class="flex justify-start">
+              <span>{{ element.from }}</span>
+            </div>
+            <div class="flex w-full justify-center items-center mr-2">
+              <div
+                class="flex flex-col justify-center items-center mb-7 ml-3 text-center w-full"
+              >
+                <p *ngIf="element.duration === 40" class="text-xs">
+                  {{ element.duration }} minutes
+                </p>
+                <p *ngIf="element.duration !== 40" class="text-xs">
+                  {{ element.duration }} hours
+                </p>
+                <div
+                  class="flex w-2/3 h-0.5 text-center rounded-full bg-gray-500"
+                >
+                  <span></span>
+                </div>
+              </div>
+              <div class="flex relative right-4 bottom-0.5">
+                <mat-icon class="align-middle">flight</mat-icon>
+              </div>
+            </div>
+
+            <div class="flex justify-end mr-3">
+              <span>{{ element.to }}</span>
+            </div>
+          </div>
+          <div
+            class="col-span-1 border-l h-full flex flex-col justify-center items-center gap-2 border-gray-300"
+          >
+            <div class="font-medium">{{ element.price }}&nbsp;€</div>
+            <button
+              class="inline-flex items-center rounded-sm border border-transparent bg-secondary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+            >
+              Book
+              <mat-icon class="align-middle text-white text-base"
+                >arrow_forward</mat-icon
+              >
+            </button>
           </div>
         </div>
-        <div class="flex relative right-4 bottom-0.5">
-          <mat-icon class="align-middle">flight</mat-icon>
-        </div>
-      </div>
-
-      <div class="flex justify-end mr-3">
-        <span>{{ element.to }}</span>
       </div>
     </div>
-    <div
-      class="col-span-1 border-l h-full flex flex-col justify-center items-center gap-2 border-gray-300"
-    >
-      <div class="font-medium">{{ element.price }}&nbsp;€</div>
+    <div class="flex justify-center mb-8">
       <button
+        routerLink="/home-page"
         class="inline-flex items-center rounded-sm border border-transparent bg-secondary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
       >
-        Book
-        <mat-icon class="align-middle text-white text-base"
-          >arrow_forward</mat-icon
-        >
+        Go back >
       </button>
     </div>
   </div>

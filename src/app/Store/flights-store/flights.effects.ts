@@ -42,13 +42,14 @@ export class FlightsEffects {
             payload.filters.dateFrom,
             payload.filters.dateTo,
             payload.filters.seatType,
-            payload.filters.passengers
+            payload.filters.passengers,
+            payload.sortColValue,
+            payload.sortOrderValue
           )
           .pipe(
             map((response) => {
-              console.log('filteredFlightsResponse=', response);
               this.router.navigate([
-                `/flight-results/${payload.filters.from}/${payload.filters.to}/${payload.filters.dateFrom}/${payload.filters.dateTo}/${payload.filters.seatType}/${payload.filters.passengers}`,
+                `/home-page/flight-results/${payload.filters.from}/${payload.filters.to}/${payload.filters.dateFrom}/${payload.filters.dateTo}/${payload.filters.seatType}/${payload.filters.passengers}`,
               ]);
 
               return {

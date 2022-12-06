@@ -1,7 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { FilterFormComponent } from '../filter-form/filter-form.component';
 import { FlightsActionTypes } from '../Store/flights-store/flights-actions';
 import { selectFilteredFlights } from '../Store/flights-store/flights.selector';
 
@@ -10,13 +18,22 @@ import { selectFilteredFlights } from '../Store/flights-store/flights.selector';
   templateUrl: './flight-results.component.html',
   styleUrls: ['./flight-results.component.css'],
 })
-export class FlightResultsComponent implements OnInit {
+export class FlightResultsComponent implements OnInit, AfterViewInit {
   filteredFlights: Observable<any[]>;
 
-  constructor(private activatedRoute: ActivatedRoute, private store: Store) {}
+  filters = {};
+
+  @ViewChild('filterForm', { static: false })
+  filterComponent: FilterFormComponent;
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private store: Store,
+    private changeDetector: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    const filters = {
+    this.filters = {
       from: this.activatedRoute.snapshot.paramMap.get('from'),
       to: this.activatedRoute.snapshot.paramMap.get('to'),
       dateFrom: this.activatedRoute.snapshot.paramMap.get('dateFrom'),
@@ -28,14 +45,22 @@ export class FlightResultsComponent implements OnInit {
     };
     this.store.dispatch({
       type: FlightsActionTypes.searchFlights,
-      filters: filters,
+      filters: this.filters,
     });
     this.filteredFlights = this.store.select(selectFilteredFlights);
+  }
+  ngAfterViewInit(): void {
+    this.filterComponent.searchForm.setValue(this.filters);
+    this.changeDetector.detectChanges();
+  }
+  sortData(event) {
+    console.log(event);
 
-    this.filteredFlights.subscribe((data) => {
-      console.log(data);
+    this.store.dispatch({
+      type: FlightsActionTypes.searchFlights,
+      filters: this.filters,
+      sortColValue: 'price',
+      sortOrderValue: event.value,
     });
-
-    console.log('filtersFromRoute=', filters);
   }
 }

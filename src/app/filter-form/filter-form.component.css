@@ -1,0 +1,17 @@
+
+::ng-deep .search-form .mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding: 0.75em 0.75em 0 0.75em;
+  border-radius: 4px 4px 0 0;
+  background: white;
+  height: 3.3rem;
+}
+
+
+::ng-deep .search-form .mat-form-field-appearance-fill .mat-form-field-flex {
+  border-radius: 4px 4px 0 0;
+  padding: 0.75em 0.75em 0 0.75em;
+  background: white;
+}
+::ng-deep .mat-radio-button.mat-accent .mat-radio-outer-circle {
+  border-color: white;
+}
