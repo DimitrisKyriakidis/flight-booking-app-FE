@@ -42,7 +42,9 @@ export class FlightsEffects {
             payload.filters.dateFrom,
             payload.filters.dateTo,
             payload.filters.seatType,
-            payload.filters.passengers
+            payload.filters.passengers,
+            payload.sortColValue,
+            payload.sortOrderValue
           )
           .pipe(
             map((response) => {

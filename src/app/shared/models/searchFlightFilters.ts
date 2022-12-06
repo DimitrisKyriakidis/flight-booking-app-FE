@@ -7,4 +7,6 @@ export class SearchFlightFilters {
     seatType?: string;
     passengers?: number;
   };
+  sortColValue?: number | string;
+  sortOrderValue?: string;
 }

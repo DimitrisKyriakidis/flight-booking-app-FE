@@ -11,14 +11,26 @@ export class FlightService {
     return this.http.get(`${this.apiUrl}/getAllFlights`);
   }
 
-  searchFlights(from, to, dateFrom, dateTo, seatType, passengers) {
-    return this.http.post(`${this.apiUrl}/searchFlights`, {
-      from,
-      to,
-      dateFrom,
-      dateTo,
-      seatType,
-      passengers,
-    });
+  searchFlights(
+    from,
+    to,
+    dateFrom,
+    dateTo,
+    seatType,
+    passengers,
+    sortColValue?,
+    sortOrderValue?
+  ) {
+    return this.http.post(
+      `${this.apiUrl}/searchFlights?sortCol=${sortColValue}&sortOrder=${sortOrderValue}`,
+      {
+        from,
+        to,
+        dateFrom,
+        dateTo,
+        seatType,
+        passengers,
+      }
+    );
   }
 }

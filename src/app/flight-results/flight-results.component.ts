@@ -50,11 +50,17 @@ export class FlightResultsComponent implements OnInit, AfterViewInit {
     this.filteredFlights = this.store.select(selectFilteredFlights);
   }
   ngAfterViewInit(): void {
-    console.log('filterComponent=', this.filterComponent);
     this.filterComponent.searchForm.setValue(this.filters);
-    this.filteredFlights.subscribe((data) => {
-      console.log(data);
-    });
     this.changeDetector.detectChanges();
+  }
+  sortData(event) {
+    console.log(event);
+
+    this.store.dispatch({
+      type: FlightsActionTypes.searchFlights,
+      filters: this.filters,
+      sortColValue: 'price',
+      sortOrderValue: event.value,
+    });
   }
 }

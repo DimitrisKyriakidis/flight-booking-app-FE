@@ -5,41 +5,52 @@
     </div>
 
     <!-- breadcrumb -->
-    <div class="flex text-center ml-4 mt-4">
-      <a routerLink="/home-page">
-        <span
-          class="material-icons text-customBlue hover:text-gray-400 hover:underline cursor-pointer align-middle"
-        >
-          home
+    <div class="flex justify-between w-2/3">
+      <div class="flex text-center ml-4 mt-4 justify-start">
+        <a routerLink="/home-page">
+          <span
+            class="material-icons text-customBlue hover:text-gray-400 hover:underline cursor-pointer align-middle"
+          >
+            home
+          </span>
+        </a>
+        <span class="material-icons text-customBlue align-middle">
+          chevron_right
         </span>
-      </a>
-      <span class="material-icons text-customBlue align-middle">
-        chevron_right
-      </span>
 
-      <a
-        [routerLink]="[
-          '/home-page/flight-results',
-          filters['from'],
-          filters['to'],
-          filters['dateFrom'],
-          filters['dateTo'],
-          filters['seatType'],
-          filters['passengers']
-        ]"
-      >
-        <span
-          class="text-customBlue hover:text-gray-400 hover:underline cursor-pointer align-middle"
-          >Results</span
+        <a
+          [routerLink]="[
+            '/home-page/flight-results',
+            filters['from'],
+            filters['to'],
+            filters['dateFrom'],
+            filters['dateTo'],
+            filters['seatType'],
+            filters['passengers']
+          ]"
         >
-      </a>
+          <span
+            class="text-customBlue hover:text-gray-400 hover:underline cursor-pointer align-middle"
+            >Results</span
+          >
+        </a>
+      </div>
     </div>
   </div>
 
   <!-- Search Results Dashboard  -->
-  <div class="col-span-6 flex flex-col justify-between">
+  <div class="col-span-6 flex flex-col justify-between mt-5">
+    <div class="flex w-5/6 justify-end">
+      <mat-form-field>
+        <mat-label class="text-customBlue">Order by</mat-label>
+        <mat-select (selectionChange)="sortData($event)" value="DESC">
+          <mat-option value="DESC">Expensivest price</mat-option>
+          <mat-option value="ASC">Cheapest price</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <div
-      class="h-[72vh] w-2/3 mx-auto mt-12 items-center space-y-10 overflow-y-auto"
+      class="h-[72vh] w-2/3 mx-auto items-center mt-4 space-y-10 overflow-y-auto"
     >
       <div
         *ngFor="let element of filteredFlights | async"
