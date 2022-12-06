@@ -6,7 +6,8 @@ module.exports = {
       colors: {
         //main theme colors
         primary: 'var(--mainColor)',
-        secondary: 'var(--secondColor)'
+        secondary: 'var(--secondColor)',
+        customBlue: '#0770E3'
       }
     }
   },

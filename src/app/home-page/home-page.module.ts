@@ -15,6 +15,8 @@ const routes = [
     path: 'flight-results/:from/:to/:dateFrom/:dateTo/:seatType/:passengers',
     component: FlightResultsComponent,
   },
+
+  { path: 'flight-results', component: FlightResultsComponent },
 ];
 
 @NgModule({

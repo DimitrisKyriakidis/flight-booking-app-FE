@@ -1,194 +1,201 @@
-<form [formGroup]="searchForm" class="search-form mt-4">
-  <div class="flex justify-center gap-8">
-    <div class="flex flex-col gap-4">
-      <div
-        class="flex gap-2"
-        [ngClass]="{
-          'flex flex-col': resultsPageActive,
-          'flex ': !resultsPageActive
-        }"
-      >
+<div
+  [ngClass]="{
+    'px-7': resultsPageActive,
+    'px-0': !resultsPageActive
+  }"
+>
+  <form [formGroup]="searchForm" class="search-form mt-4">
+    <div class="flex justify-center gap-8">
+      <div class="flex flex-col gap-4">
         <div
-          class="flex flex-col"
+          class="flex gap-2"
           [ngClass]="{
-            'w-full': resultsPageActive,
-            'w-1/2': !resultsPageActive
+            'flex flex-col': resultsPageActive,
+            'flex ': !resultsPageActive
           }"
         >
-          <h4 class="text-white">From</h4>
-          <mat-form-field>
-            <mat-label>From</mat-label>
-            <mat-select formControlName="from" required>
-              <mat-option
-                *ngFor="let flight of (allFlights | async).from"
-                [value]="flight"
-                >{{ flight }}</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-          <mat-errors
-            class="-mt-4"
-            *ngIf="
-              (submitted && searchForm.get('from').errors?.required) ||
-              (searchForm.get('from').errors?.required &&
-                searchForm.get('from').touched)
-            "
+          <div
+            class="flex flex-col"
+            [ngClass]="{
+              'w-full': resultsPageActive,
+              'w-1/2': !resultsPageActive
+            }"
           >
-            <span class="text-red-600 text-xs"> This field is required</span>
-          </mat-errors>
-        </div>
-
-        <div
-          class="flex flex-col"
-          [ngClass]="{
-            'w-full': resultsPageActive,
-            'w-1/2': !resultsPageActive
-          }"
-        >
-          <h4 class="text-white">To</h4>
-          <mat-form-field>
-            <mat-label>To</mat-label>
-            <mat-select formControlName="to" required>
-              <mat-option
-                *ngFor="let flight of (allFlights | async).to"
-                [value]="flight"
-                >{{ flight }}</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-          <mat-errors
-            class="-mt-4"
-            *ngIf="
-              (submitted && searchForm.get('to').errors?.required) ||
-              (searchForm.get('to').errors?.required &&
-                searchForm.get('to').touched)
-            "
-          >
-            <span class="text-red-600 text-xs"> This field is required</span>
-          </mat-errors>
-        </div>
-      </div>
-
-      <div
-        class="flex gap-2"
-        [ngClass]="{
-          'flex flex-col': resultsPageActive,
-          'flex ': !resultsPageActive
-        }"
-      >
-        <div class="flex flex-col gap-2">
-          <h4 class="text-white"></h4>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Departure Date</mat-label>
-            <input
-              matInput
-              formControlName="dateFrom"
-              [matDatepickerFilter]="departureDatesFilter"
-              [matDatepicker]="picker"
-            />
-
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          <mat-errors
-            *ngIf="searchForm.errors?.invalidDateRange && searchForm.dirty"
-            class="-mt-6"
-          >
-            <span class="text-red-600 text-xs">
-              The departure date must be before the return date</span
-            >
-          </mat-errors>
-          <mat-errors
-            *ngIf="
-              (submitted && dateFromControl.errors?.required) ||
-              (dateFromControl.errors?.required &&
-                (dateFromControl.dirty || dateFromControl.touched))
-            "
-            class="-mt-6"
-          >
-            <span class="text-red-600 text-xs"> This field is required</span>
-          </mat-errors>
-        </div>
-
-        <div class="flex flex-col gap-2">
-          <h4 class="text-white"></h4>
-          <mat-form-field class="" appearance="fill">
-            <mat-label>Return Date</mat-label>
-            <input
-              matInput
-              formControlName="dateTo"
-              [matDatepickerFilter]="returnDatesFilter"
-              [matDatepicker]="picker2"
-            />
-
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker2"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-          </mat-form-field>
-          <mat-errors
-            *ngIf="
-              (submitted && dateToControl.errors?.required) ||
-              (dateToControl.errors?.required &&
-                (dateToControl.dirty || dateToControl.touched))
-            "
-            class="-mt-6"
-          >
-            <span class="text-red-600 text-xs"> This field is required</span>
-          </mat-errors>
-        </div>
-      </div>
-
-      <div class="flex w-full gap-2">
-        <div class="flex flex-col w-1/2 text-white">
-          <h4>Seat</h4>
-
-          <mat-radio-group formControlName="seatType">
-            <div class="flex flex-col gap-3">
-              <mat-radio-button value="economy">Economy</mat-radio-button>
-              <mat-radio-button value="premium">Premium</mat-radio-button>
-            </div>
-          </mat-radio-group>
-        </div>
-
-        <div class="flex flex-col w-1/2">
-          <div class="flex flex-col">
-            <h4 class="text-white">Passengers</h4>
+            <h4 class="text-white">From</h4>
             <mat-form-field>
-              <input
-                formControlName="passengers"
-                type="number"
-                required
-                matInput
-              />
+              <mat-label>From</mat-label>
+              <mat-select formControlName="from" required>
+                <mat-option
+                  *ngFor="let flight of (allFlights | async).from"
+                  [value]="flight"
+                  >{{ flight }}</mat-option
+                >
+              </mat-select>
             </mat-form-field>
+            <mat-errors
+              class="-mt-4"
+              *ngIf="
+                (submitted && searchForm.get('from').errors?.required) ||
+                (searchForm.get('from').errors?.required &&
+                  searchForm.get('from').touched)
+              "
+            >
+              <span class="text-red-600 text-xs"> This field is required</span>
+            </mat-errors>
           </div>
-          <mat-errors
-            class="-mt-4"
-            *ngIf="
-              (submitted && searchForm.get('passengers').errors?.required) ||
-              (searchForm.get('passengers').errors?.required &&
-                searchForm.get('passengers').touched)
-            "
+
+          <div
+            class="flex flex-col"
+            [ngClass]="{
+              'w-full': resultsPageActive,
+              'w-1/2': !resultsPageActive
+            }"
           >
-            <span class="text-red-600 text-xs"> This field is required</span>
-          </mat-errors>
+            <h4 class="text-white">To</h4>
+            <mat-form-field>
+              <mat-label>To</mat-label>
+              <mat-select formControlName="to" required>
+                <mat-option
+                  *ngFor="let flight of (allFlights | async).to"
+                  [value]="flight"
+                  >{{ flight }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+            <mat-errors
+              class="-mt-4"
+              *ngIf="
+                (submitted && searchForm.get('to').errors?.required) ||
+                (searchForm.get('to').errors?.required &&
+                  searchForm.get('to').touched)
+              "
+            >
+              <span class="text-red-600 text-xs"> This field is required</span>
+            </mat-errors>
+          </div>
+        </div>
+
+        <div
+          class="flex gap-2"
+          [ngClass]="{
+            'flex flex-col': resultsPageActive,
+            'flex ': !resultsPageActive
+          }"
+        >
+          <div class="flex flex-col gap-2">
+            <h4 class="text-white"></h4>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Departure Date</mat-label>
+              <input
+                matInput
+                formControlName="dateFrom"
+                [matDatepickerFilter]="departureDatesFilter"
+                [matDatepicker]="picker"
+              />
+
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-errors
+              *ngIf="searchForm.errors?.invalidDateRange && searchForm.dirty"
+              class="-mt-6"
+            >
+              <span class="text-red-600 text-xs">
+                The departure date must be before the return date</span
+              >
+            </mat-errors>
+            <mat-errors
+              *ngIf="
+                (submitted && dateFromControl.errors?.required) ||
+                (dateFromControl.errors?.required &&
+                  (dateFromControl.dirty || dateFromControl.touched))
+              "
+              class="-mt-6"
+            >
+              <span class="text-red-600 text-xs"> This field is required</span>
+            </mat-errors>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <h4 class="text-white"></h4>
+            <mat-form-field class="" appearance="fill">
+              <mat-label>Return Date</mat-label>
+              <input
+                matInput
+                formControlName="dateTo"
+                [matDatepickerFilter]="returnDatesFilter"
+                [matDatepicker]="picker2"
+              />
+
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker2"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <mat-errors
+              *ngIf="
+                (submitted && dateToControl.errors?.required) ||
+                (dateToControl.errors?.required &&
+                  (dateToControl.dirty || dateToControl.touched))
+              "
+              class="-mt-6"
+            >
+              <span class="text-red-600 text-xs"> This field is required</span>
+            </mat-errors>
+          </div>
+        </div>
+
+        <div class="flex w-full gap-2">
+          <div class="flex flex-col w-1/2 text-white">
+            <h4>Seat</h4>
+
+            <mat-radio-group formControlName="seatType">
+              <div class="flex flex-col gap-3">
+                <mat-radio-button value="economy">Economy</mat-radio-button>
+                <mat-radio-button value="premium">Premium</mat-radio-button>
+              </div>
+            </mat-radio-group>
+          </div>
+
+          <div class="flex flex-col w-1/2">
+            <div class="flex flex-col">
+              <h4 class="text-white">Passengers</h4>
+              <mat-form-field>
+                <input
+                  formControlName="passengers"
+                  type="number"
+                  required
+                  matInput
+                />
+              </mat-form-field>
+            </div>
+            <mat-errors
+              class="-mt-4"
+              *ngIf="
+                (submitted && searchForm.get('passengers').errors?.required) ||
+                (searchForm.get('passengers').errors?.required &&
+                  searchForm.get('passengers').touched)
+              "
+            >
+              <span class="text-red-600 text-xs"> This field is required</span>
+            </mat-errors>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="flex justify-center mt-5">
-    <button
-      (click)="searchFlights()"
-      class="inline-flex items-center rounded-sm border border-transparent bg-secondary px-10 py-2 text-sm font-medium text-white shadow-sm hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
-    >
-      Search
-    </button>
-  </div>
-</form>
+    <div class="flex justify-center mt-5">
+      <button
+        (click)="searchFlights()"
+        class="inline-flex items-center rounded-sm border border-transparent bg-secondary px-10 py-2 text-sm font-medium text-white shadow-sm hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+      >
+        Search
+      </button>
+    </div>
+  </form>
+</div>
