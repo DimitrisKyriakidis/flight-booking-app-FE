@@ -77,13 +77,11 @@ export class FilterFormComponent implements OnInit, OnDestroy {
     this.dateFromControl.valueChanges.subscribe((val) => {
       const newDateFromVal = this.datePipe.transform(val, 'yyyy-MM-dd');
       this.dateFromControl.patchValue(newDateFromVal, { emitEvent: false });
-      console.log(this.searchForm.value.dateFrom);
     });
 
     this.dateToControl.valueChanges.subscribe((val) => {
       const newDateToVal = this.datePipe.transform(val, 'yyyy-MM-dd');
       this.dateToControl.patchValue(newDateToVal, { emitEvent: false });
-      console.log(this.searchForm.value.dateTo);
     });
   }
 

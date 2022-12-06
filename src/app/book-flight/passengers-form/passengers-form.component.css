@@ -1,0 +1,8 @@
+.mat-radio-button.mat-accent .mat-radio-outer-circle {
+    border-color: var(--mainColor);
+}
+
+mat-form-field{
+    width: 15vw;
+}
+  

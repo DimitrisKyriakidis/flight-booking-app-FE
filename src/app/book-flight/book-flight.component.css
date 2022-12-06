@@ -1,0 +1,9 @@
+::ng-deep .mat-horizontal-stepper-header-container {
+     white-space: nowrap; 
+    display: flex;
+    align-items: center;
+    width: 45%!important;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}

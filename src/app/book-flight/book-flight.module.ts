@@ -6,25 +6,17 @@ import { SharedModule } from 'src/app/shared/modules/shared.module';
 import { FilterFormComponent } from '../filter-form/filter-form.component';
 import { FlightResultsComponent } from '../flight-results/flight-results.component';
 import { BreadcrumbModule } from 'xng-breadcrumb';
-import { HomePageComponent } from './home-page.component';
+
+import { BookFlightComponent } from './book-flight.component';
+import { PassengersFormComponent } from './passengers-form/passengers-form.component';
 
 const routes = [
-  { path: '', component: HomePageComponent },
-  { path: 'filter-form', component: FilterFormComponent },
-  {
-    path: 'flight-results/:from/:to/:dateFrom/:dateTo/:seatType/:passengers',
-    component: FlightResultsComponent,
-  },
-
-  // { path: 'flight-results', component: FlightResultsComponent },
+  { path: '', component: BookFlightComponent },
+  { path: 'passengers-form', component: PassengersFormComponent },
 ];
 
 @NgModule({
-  declarations: [
-    HomePageComponent,
-    FilterFormComponent,
-    FlightResultsComponent,
-  ],
+  declarations: [BookFlightComponent, PassengersFormComponent],
   imports: [
     CommonModule,
     AngularMaterialModule,
@@ -35,4 +27,4 @@ const routes = [
   exports: [RouterModule],
   providers: [DatePipe],
 })
-export class HomePageModule {}
+export class BookFlightModule {}

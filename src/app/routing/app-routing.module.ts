@@ -15,6 +15,14 @@ const routes: Routes = [
       import('../home-page/home-page.module').then((m) => m.HomePageModule),
   },
 
+  {
+    path: 'book-flight/:id/:from/:to/:dateFrom/:dateTo/:seatType/:passengers',
+    loadChildren: () =>
+      import('../book-flight/book-flight.module').then(
+        (m) => m.BookFlightModule
+      ),
+  },
+
   // {
   //   path: 'flight-results/:from/:to/:dateFrom/:dateTo/:seatType/:passengers',
   //   loadChildren: () =>

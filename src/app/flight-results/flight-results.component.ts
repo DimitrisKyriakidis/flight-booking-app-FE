@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { FilterFormComponent } from '../filter-form/filter-form.component';
@@ -29,7 +29,8 @@ export class FlightResultsComponent implements OnInit, AfterViewInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private store: Store,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -62,5 +63,15 @@ export class FlightResultsComponent implements OnInit, AfterViewInit {
       sortColValue: 'price',
       sortOrderValue: event.value,
     });
+  }
+  goToBookFlight(id) {
+    console.log(this.filters['from']);
+    //  this.router.navigate(['/home-page/flight-results/', this.filters['from'],this.filters['to'],this.filters['dateFrom'],this.filters['dateTo'],this.filters['seatType'],this.filters['passengers']]);
+    // this.router.navigate([
+    //   `/home-page/flight-results/${this.filters['from']}/${this.filters['to']}/${this.filters['dateFrom']}/${this.filters['dateTo']}/${this.filters['seatType']}/${this.filters['passengers']}/book-flight`,
+    // ]);
+    this.router.navigateByUrl(
+      `/book-flight/${id}/${this.filters['from']}/${this.filters['to']}/${this.filters['dateFrom']}/${this.filters['dateTo']}/${this.filters['seatType']}/${this.filters['passengers']}`
+    );
   }
 }

@@ -31,13 +31,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
   exports: [
     CommonModule,
+    MatStepperModule,
     MatProgressBarModule,
     MatExpansionModule,
     MatChipsModule,
