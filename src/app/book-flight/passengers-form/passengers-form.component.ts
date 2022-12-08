@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -37,24 +42,21 @@ export class PassengersFormComponent implements OnInit {
     this.passengersForm = this.fb.group({
       passengers: this.fb.array([this.createPassengersFormArray()]),
     });
-    for (let i = 0; i < this.filters['passengers']; i++) {
+    for (let i = 1; i < this.filters['passengers']; i++) {
       this.passengers.push(this.createPassengersFormArray());
     }
-    console.log(this.passengersForm);
   }
 
   createPassengersFormArray() {
     return this.fb.group({
-      firstName: [],
-      lastName: [],
-      gender: [],
-      birthDate: [],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      gender: ['', Validators.required],
+      birthDate: ['', Validators.required],
     });
   }
+
   get passengers() {
     return this.passengersForm.get('passengers')['controls'] as FormArray;
   }
-  // add() {
-  //   this.passengers.push(this.createPassengersFormArray());
-  // }
 }

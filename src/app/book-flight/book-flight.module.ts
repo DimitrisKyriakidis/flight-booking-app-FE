@@ -9,14 +9,20 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
 
 import { BookFlightComponent } from './book-flight.component';
 import { PassengersFormComponent } from './passengers-form/passengers-form.component';
+import { PaymentFormComponent } from './payment-form/payment-form.component';
 
 const routes = [
   { path: '', component: BookFlightComponent },
   { path: 'passengers-form', component: PassengersFormComponent },
+  { path: 'payment-form', component: PaymentFormComponent },
 ];
 
 @NgModule({
-  declarations: [BookFlightComponent, PassengersFormComponent],
+  declarations: [
+    BookFlightComponent,
+    PassengersFormComponent,
+    PaymentFormComponent,
+  ],
   imports: [
     CommonModule,
     AngularMaterialModule,

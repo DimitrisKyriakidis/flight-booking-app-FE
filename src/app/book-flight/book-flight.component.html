@@ -1,29 +1,31 @@
 <mat-stepper linear="false" #stepper>
-  <mat-step>
+  <mat-step [stepControl]="step1.passengersForm" editable="true">
     <ng-template matStepLabel>Passengers Form</ng-template>
-    <app-passengers-form></app-passengers-form>
-    <div>
-      <button mat-button matStepperNext>Next</button>
+    <app-passengers-form #step1></app-passengers-form>
+    <div class="flex justify-center py-5">
+      <button
+        type="button"
+        matStepperNext
+        class="inline-flex items-center rounded-sm border border-transparent bg-secondary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+      >
+        Continue to payments
+      </button>
     </div>
   </mat-step>
-  <mat-step>
+
+  <mat-step [stepControl]="step2.paymentForm">
     <ng-template matStepLabel>Payment Form</ng-template>
-    <!-- <form [formGroup]="secondFormGroup">
-     
-      <mat-form-field appearance="fill">
-        <mat-label>Address</mat-label>
-        <input
-          matInput
-          formControlName="secondCtrl"
-          placeholder="Ex. 1 Main St, New York, NY"
-          required
-        />
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form> -->
+    <app-payment-form #step2></app-payment-form>
+    <div class="flex justify-center mt-6">
+      <button
+        (click)="saveFlight(step2.paymentForm)"
+        type="button"
+        matStepperNext
+        class="inline-flex items-center rounded-sm border border-transparent bg-secondary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+      >
+        Submit
+      </button>
+    </div>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>

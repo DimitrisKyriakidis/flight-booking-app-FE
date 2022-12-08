@@ -33,4 +33,9 @@ export class FlightService {
       }
     );
   }
+
+  saveFlight(flight: {}) {
+    //const reqBody = { filters: filters, passengers: passengers };
+    return this.http.post(`${this.apiUrl}/saveFlight`, flight);
+  }
 }

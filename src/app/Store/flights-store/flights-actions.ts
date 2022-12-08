@@ -10,6 +10,10 @@ export const enum FlightsActionTypes {
   searchFlights = '[Flights] search flights',
   searchFlightsSuccess = '[Flights] search flights success',
   searchFlightsFail = '[Flights] search flights fail',
+
+  saveFlight = '[Flights] save flight',
+  saveFlightSuccess = '[Flights] save flight success',
+  saveFlightFail = '[Flights] save flight fail',
 }
 
 export const getAllFlights = createAction(FlightsActionTypes.getAllFlights);
@@ -38,5 +42,23 @@ export const searchFlightsSuccess = createAction(
 
 export const searchFlightsFlightsFail = createAction(
   FlightsActionTypes.searchFlightsFail,
+  props<{ error: string }>()
+);
+
+export const saveFlight = createAction(
+  FlightsActionTypes.saveFlight,
+  props<{
+    flight: {};
+    // filters: {};
+    // passengers: [];
+  }>()
+);
+
+export const saveFlightSuccess = createAction(
+  FlightsActionTypes.saveFlightSuccess
+);
+
+export const saveFlightFail = createAction(
+  FlightsActionTypes.saveFlightFail,
   props<{ error: string }>()
 );

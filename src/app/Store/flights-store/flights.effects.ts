@@ -65,6 +65,28 @@ export class FlightsEffects {
     );
   });
 
+  saveFLight$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FlightsActionTypes.saveFlight),
+      mergeMap((payload) =>
+        this.flightService.saveFlight(payload['flight']).pipe(
+          map((response) => {
+            console.log('payload=', payload);
+
+            console.log(response);
+
+            return {
+              type: FlightsActionTypes.saveFlightSuccess,
+            };
+          }),
+          catchError(() => {
+            return of({ type: FlightsActionTypes.saveFlightSuccess });
+          })
+        )
+      )
+    );
+  });
+
   constructor(
     private flightService: FlightService,
     private actions$: Actions,

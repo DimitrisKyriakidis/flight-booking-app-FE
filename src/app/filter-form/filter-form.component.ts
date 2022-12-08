@@ -50,8 +50,8 @@ export class FilterFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.unsubscribe$.next();
-    // this.unsubscribe$.complete();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
   initForm() {
     this.searchForm = new FormGroup(
