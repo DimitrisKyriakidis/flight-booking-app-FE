@@ -56,7 +56,7 @@
                   filters['passengers']
                 ]"
                 class="ml-4 text-sm font-medium text-customBlue hover:text-gray-700"
-                >Flight Results</a
+                >Flight results</a
               >
             </div>
           </li>
@@ -76,6 +76,10 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <div *ngIf="loading | async">
+      <mat-spinner class="mx-auto" [mode]="determinate"></mat-spinner>
+    </div>
+
     <div
       *ngIf="(filteredFlights | async).length === 0"
       class="flex flex-col mx-auto items-center gap-5 mt-16"

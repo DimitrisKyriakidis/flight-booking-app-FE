@@ -25,7 +25,6 @@ import { selectAllFlights } from '../Store/flights-store/flights.selector';
 export class FilterFormComponent implements OnInit, OnDestroy {
   loading: Observable<boolean>;
 
-  @Output() sendForm = new EventEmitter<FormGroup>();
   searchForm: FormGroup;
 
   submitted: boolean = false;
@@ -68,11 +67,6 @@ export class FilterFormComponent implements OnInit, OnDestroy {
         updateOn: 'blur',
       }
     );
-    if (this.searchForm.valid) {
-      this.searchForm.valueChanges.subscribe((val) => {
-        this.sendForm.emit(val);
-      });
-    }
 
     this.dateFromControl.valueChanges.subscribe((val) => {
       const newDateFromVal = this.datePipe.transform(val, 'yyyy-MM-dd');
@@ -121,7 +115,6 @@ export class FilterFormComponent implements OnInit, OnDestroy {
 
   searchFlights() {
     this.submitted = true;
-    console.log(this.searchForm);
     if (this.searchForm.valid) {
       this.store.dispatch({
         type: FlightsActionTypes.searchFlights,

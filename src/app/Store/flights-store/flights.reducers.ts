@@ -26,6 +26,7 @@ export const _flightsReducer = createReducer(
       to: [...new Set(to)],
       dateFrom: action.allFlights.map((flight) => flight.dateFrom),
       dateTo: action.allFlights.map((flight) => flight.dateTo),
+      loading: false,
     };
   }),
   on(searchFlights, (state) => {

@@ -1,7 +1,10 @@
 <div
-  class="flex w-full h-[90vh] items-center bg-no-repeat bg-cover bg-center"
+  class="flex flex-col w-full h-[90vh] items-center bg-no-repeat bg-cover bg-center"
   style="background-image: url('../../assets/images/homeBg.jpg')"
 >
+  <div class="mt-9 min-[1600px]:mt-32">
+    <h3 style="font-size: 2rem" class="text-white">Search flights</h3>
+  </div>
   <div class="w-[50rem] h-[30rem] opacity-90 mx-auto bg-primary rounded-sm">
     <app-filter-form [resultsPageActive]="false"></app-filter-form>
   </div>

@@ -11,7 +11,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { FilterFormComponent } from '../filter-form/filter-form.component';
 import { FlightsActionTypes } from '../Store/flights-store/flights-actions';
-import { selectFilteredFlights } from '../Store/flights-store/flights.selector';
+import {
+  selectFilteredFlights,
+  selectLoader,
+} from '../Store/flights-store/flights.selector';
 
 @Component({
   selector: 'app-flight-results',
@@ -19,6 +22,8 @@ import { selectFilteredFlights } from '../Store/flights-store/flights.selector';
   styleUrls: ['./flight-results.component.css'],
 })
 export class FlightResultsComponent implements OnInit, AfterViewInit {
+  loading: Observable<boolean>;
+
   filteredFlights: Observable<any[]>;
 
   filters = {};
@@ -44,14 +49,13 @@ export class FlightResultsComponent implements OnInit, AfterViewInit {
         this.activatedRoute.snapshot.paramMap.get('passengers')
       ),
     };
+
     this.store.dispatch({
       type: FlightsActionTypes.searchFlights,
       filters: this.filters,
     });
     this.filteredFlights = this.store.select(selectFilteredFlights);
-    this.filteredFlights.subscribe((data) => {
-      console.log(data.length);
-    });
+    this.loading = this.store.select(selectLoader);
   }
   ngAfterViewInit(): void {
     this.filterComponent.searchForm.setValue(this.filters);

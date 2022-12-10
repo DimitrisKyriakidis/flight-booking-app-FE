@@ -42,12 +42,12 @@ export class BookFlightComponent implements OnInit, AfterViewInit {
   saveFlight(paymentForm: FormGroup) {
     if (paymentForm.valid) {
       this.loading = true;
-      let filters = this.step1['filters'];
+      const filters = this.step1['filters'];
 
       let passengersFormValue =
         this.step1.passengersForm.get('passengers')['controls'];
 
-      let newForm = [];
+      const newForm = [];
 
       passengersFormValue.forEach((element) => {
         newForm.push(element.value);
