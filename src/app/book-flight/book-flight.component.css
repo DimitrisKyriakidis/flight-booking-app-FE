@@ -1,11 +1,15 @@
 ::ng-deep .mat-horizontal-stepper-header-container {
-     white-space: nowrap; 
+    white-space: nowrap; 
     display: flex;
     align-items: center;
     width: 50%!important;
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
+    /* margin-bottom: -2rem; */
+}
+::ng-deep .mat-step-header .mat-step-icon-selected{
+    background: #0770E3!important;
 }
 ::ng-deep .snackbarClass {
     background: white;

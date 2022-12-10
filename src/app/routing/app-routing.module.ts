@@ -16,7 +16,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'book-flight/:id/:from/:to/:dateFrom/:dateTo/:seatType/:passengers',
+    path: 'book-flight/:id/:from/:to/:dateFrom/:dateTo/:seatType/:passengers/:price',
     loadChildren: () =>
       import('../book-flight/book-flight.module').then(
         (m) => m.BookFlightModule

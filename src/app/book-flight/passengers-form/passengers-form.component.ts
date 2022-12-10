@@ -38,6 +38,7 @@ export class PassengersFormComponent implements OnInit {
       passengers: Number(
         this.activatedRoute.snapshot.paramMap.get('passengers')
       ),
+      price: Number(this.activatedRoute.snapshot.paramMap.get('price')),
     };
     this.passengersForm = this.fb.group({
       passengers: this.fb.array([this.createPassengersFormArray()]),

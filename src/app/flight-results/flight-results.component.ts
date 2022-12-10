@@ -49,6 +49,9 @@ export class FlightResultsComponent implements OnInit, AfterViewInit {
       filters: this.filters,
     });
     this.filteredFlights = this.store.select(selectFilteredFlights);
+    this.filteredFlights.subscribe((data) => {
+      console.log(data.length);
+    });
   }
   ngAfterViewInit(): void {
     this.filterComponent.searchForm.setValue(this.filters);
@@ -62,14 +65,14 @@ export class FlightResultsComponent implements OnInit, AfterViewInit {
       sortOrderValue: event.value,
     });
   }
-  goToBookFlight(id) {
+  goToBookFlight(id, price) {
     console.log(this.filters['from']);
     //  this.router.navigate(['/home-page/flight-results/', this.filters['from'],this.filters['to'],this.filters['dateFrom'],this.filters['dateTo'],this.filters['seatType'],this.filters['passengers']]);
     // this.router.navigate([
     //   `/home-page/flight-results/${this.filters['from']}/${this.filters['to']}/${this.filters['dateFrom']}/${this.filters['dateTo']}/${this.filters['seatType']}/${this.filters['passengers']}/book-flight`,
     // ]);
     this.router.navigateByUrl(
-      `/book-flight/${id}/${this.filters['from']}/${this.filters['to']}/${this.filters['dateFrom']}/${this.filters['dateTo']}/${this.filters['seatType']}/${this.filters['passengers']}`
+      `/book-flight/${id}/${this.filters['from']}/${this.filters['to']}/${this.filters['dateFrom']}/${this.filters['dateTo']}/${this.filters['seatType']}/${this.filters['passengers']}/${price}`
     );
   }
 }

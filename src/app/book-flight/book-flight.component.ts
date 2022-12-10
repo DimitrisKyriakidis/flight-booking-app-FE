@@ -13,6 +13,7 @@ import { FlightsActionTypes } from '../Store/flights-store/flights-actions';
 import { selectLoader } from '../Store/flights-store/flights.selector';
 import { PassengersFormComponent } from './passengers-form/passengers-form.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-book-flight',
@@ -28,7 +29,8 @@ export class BookFlightComponent implements OnInit, AfterViewInit {
   constructor(
     private store: Store,
     private changeDetector: ChangeDetectorRef,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {}
@@ -46,6 +48,7 @@ export class BookFlightComponent implements OnInit, AfterViewInit {
         this.step1.passengersForm.get('passengers')['controls'];
 
       let newForm = [];
+
       passengersFormValue.forEach((element) => {
         newForm.push(element.value);
       });
@@ -55,16 +58,21 @@ export class BookFlightComponent implements OnInit, AfterViewInit {
         type: FlightsActionTypes.saveFlight,
         flight: flight,
       });
+
       setTimeout(() => {
         this.loading = false;
       }, 3000);
 
-      this.snackBar.open('Flight ticket has been booked successfully', 'X', {
-        duration: 6000,
-        verticalPosition: 'top',
-        horizontalPosition: 'center',
-        panelClass: ['snackbarClass'],
-      });
+      this.successMessage();
     }
+  }
+
+  successMessage() {
+    this.snackBar.open('Flight ticket has been booked successfully', 'X', {
+      duration: 6000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
+      panelClass: ['snackbarClass'],
+    });
   }
 }

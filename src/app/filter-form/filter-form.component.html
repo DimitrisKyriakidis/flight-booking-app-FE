@@ -21,7 +21,7 @@
               'w-1/2': !resultsPageActive
             }"
           >
-            <h4 class="text-white">From</h4>
+            <h4 *ngIf="!resultsPageActive" class="text-white">From</h4>
             <mat-form-field>
               <mat-label>From</mat-label>
               <mat-select formControlName="from" required>
@@ -51,7 +51,7 @@
               'w-1/2': !resultsPageActive
             }"
           >
-            <h4 class="text-white">To</h4>
+            <h4 *ngIf="!resultsPageActive" class="text-white">To</h4>
             <mat-form-field>
               <mat-label>To</mat-label>
               <mat-select formControlName="to" required>
@@ -83,7 +83,9 @@
           }"
         >
           <div class="flex flex-col gap-2">
-            <h4 class="text-white"></h4>
+            <h4 *ngIf="!resultsPageActive" class="text-white">
+              Departure Date
+            </h4>
 
             <mat-form-field appearance="fill">
               <mat-label>Departure Date</mat-label>
@@ -121,7 +123,7 @@
           </div>
 
           <div class="flex flex-col gap-2">
-            <h4 class="text-white"></h4>
+            <h4 *ngIf="!resultsPageActive" class="text-white">Return Date</h4>
             <mat-form-field class="" appearance="fill">
               <mat-label>Return Date</mat-label>
               <input
@@ -169,6 +171,8 @@
                 <input
                   formControlName="passengers"
                   type="number"
+                  min="1"
+                  max="3"
                   required
                   matInput
                 />

@@ -5,36 +5,63 @@
     </div>
 
     <!-- breadcrumb -->
-    <div class="flex justify-between w-2/3">
-      <div class="flex text-center ml-4 mt-4 justify-start">
-        <a routerLink="/home-page">
-          <span
-            class="material-icons text-customBlue hover:text-gray-400 hover:underline cursor-pointer align-middle"
-          >
-            home
-          </span>
-        </a>
-        <span class="material-icons text-customBlue align-middle">
-          chevron_right
-        </span>
+    <div class="h-12 whitespace-nowrap">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol role="list" class="flex space-x-4 rounded-md bg-white px-6 shadow">
+          <li class="flex">
+            <div class="flex items-center">
+              <a
+                routerLink="/home-page"
+                class="text-customBlue hover:text-gray-500"
+              >
+                <!-- Heroicon name: mini/home -->
+                <svg
+                  class="h-5 w-5 flex-shrink-0"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="sr-only">Home</span>
+              </a>
+            </div>
+          </li>
 
-        <a
-          [routerLink]="[
-            '/home-page/flight-results',
-            filters['from'],
-            filters['to'],
-            filters['dateFrom'],
-            filters['dateTo'],
-            filters['seatType'],
-            filters['passengers']
-          ]"
-        >
-          <span
-            class="text-customBlue hover:text-gray-400 hover:underline cursor-pointer align-middle"
-            >Results</span
-          >
-        </a>
-      </div>
+          <li class="flex">
+            <div class="flex items-center">
+              <svg
+                class="h-full w-6 flex-shrink-0 text-gray-200"
+                viewBox="0 0 24 44"
+                preserveAspectRatio="none"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
+              </svg>
+              <a
+                [routerLink]="[
+                  '/home-page/flight-results',
+                  filters['from'],
+                  filters['to'],
+                  filters['dateFrom'],
+                  filters['dateTo'],
+                  filters['seatType'],
+                  filters['passengers']
+                ]"
+                class="ml-4 text-sm font-medium text-customBlue hover:text-gray-700"
+                >Flight Results</a
+              >
+            </div>
+          </li>
+        </ol>
+      </nav>
     </div>
   </div>
 
@@ -50,6 +77,16 @@
       </mat-form-field>
     </div>
     <div
+      *ngIf="(filteredFlights | async).length === 0"
+      class="flex flex-col mx-auto items-center gap-5 mt-16"
+    >
+      <img src="../../assets/images/no-results.png" class="w-48" />
+      <p class="text-lg text-gray-500">
+        Sorry, there are no flights matching your filters.
+      </p>
+    </div>
+
+    <div
       class="h-[72vh] w-2/3 mx-auto items-center mb-16 space-y-10 overflow-y-auto min-[1700px]:mb-56"
     >
       <div
@@ -61,8 +98,8 @@
             <img [src]="element.image" class="w-36" />
           </div>
           <div class="col-span-2 flex flex-col">
-            <div class="flex justify-between items-center px-2 text-gray-500">
-              <div class="flex justify-start">
+            <div class="flex justify-between items-center px-2 mt-4">
+              <div class="flex justify-start font-medium">
                 <span>{{ element.from }}</span>
               </div>
 
@@ -70,10 +107,16 @@
                 <div
                   class="flex flex-col justify-center items-center mb-7 ml-3 text-center w-full"
                 >
-                  <p *ngIf="element.duration === 40" class="text-xs">
+                  <p
+                    *ngIf="element.duration === 40"
+                    class="text-gray-500 text-xs"
+                  >
                     {{ element.duration }} minutes
                   </p>
-                  <p *ngIf="element.duration !== 40" class="text-xs">
+                  <p
+                    *ngIf="element.duration !== 40"
+                    class="text-gray-500 text-xs"
+                  >
                     {{ element.duration }} hours
                   </p>
                   <div
@@ -83,16 +126,16 @@
                   </div>
                 </div>
                 <div class="flex relative right-4 bottom-0.5">
-                  <mat-icon class="align-middle">flight</mat-icon>
+                  <mat-icon class="align-middle text-gray-500">flight</mat-icon>
                 </div>
               </div>
 
-              <div class="flex justify-end mr-3">
+              <div class="flex justify-end font-medium mr-3">
                 <span>{{ element.to }}</span>
               </div>
             </div>
-            <div>
-              <p class="text-xs">
+            <div class="flex justify-center">
+              <p class="text-xs text-gray-500">
                 Available seats {{ element.availableSeats }}
               </p>
             </div>
@@ -103,7 +146,7 @@
           >
             <div class="font-medium">{{ element.price }}&nbsp;€</div>
             <button
-              (click)="goToBookFlight(element.id)"
+              (click)="goToBookFlight(element.id, element.price)"
               class="inline-flex items-center rounded-sm border border-transparent bg-secondary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
             >
               Book
