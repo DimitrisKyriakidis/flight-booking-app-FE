@@ -1,7 +1,9 @@
 <mat-stepper linear="false" #stepper>
   <mat-step [stepControl]="step1.passengersForm" editable="true">
     <ng-template matStepLabel>Passengers Form</ng-template>
+
     <app-passengers-form #step1></app-passengers-form>
+
     <div class="flex justify-center py-5">
       <button
         type="button"
@@ -29,10 +31,21 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+    <div *ngIf="!loading" class="flex flex-col items-center justify-center">
+      <div>
+        <button
+          routerLink="/home-page"
+          type="button"
+          class="inline-flex items-center rounded-sm border border-transparent bg-secondary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+        >
+          Go back
+        </button>
+        <!-- <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button> -->
+      </div>
     </div>
   </mat-step>
 </mat-stepper>
+<div *ngIf="loading">
+  <mat-spinner class="mx-auto" [mode]="determinate"></mat-spinner>
+</div>

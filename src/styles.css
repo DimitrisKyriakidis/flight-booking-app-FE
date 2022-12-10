@@ -28,3 +28,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background: var(--secondColor);
   border-radius: 10px;
 }
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: var(--mainColor);
+}
+

@@ -55,8 +55,6 @@ export class FlightResultsComponent implements OnInit, AfterViewInit {
     this.changeDetector.detectChanges();
   }
   sortData(event) {
-    console.log(event);
-
     this.store.dispatch({
       type: FlightsActionTypes.searchFlights,
       filters: this.filters,
