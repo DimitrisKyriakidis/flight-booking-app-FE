@@ -5,10 +5,12 @@ import {
   OnInit,
 } from '@angular/core';
 import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -40,12 +42,16 @@ export class PassengersFormComponent implements OnInit {
       ),
       price: Number(this.activatedRoute.snapshot.paramMap.get('price')),
     };
+
     this.passengersForm = this.fb.group({
       passengers: this.fb.array([this.createPassengersFormArray()]),
     });
+
     for (let i = 1; i < this.filters['passengers']; i++) {
       this.passengers.push(this.createPassengersFormArray());
     }
+
+    console.log('initialForm=', this.passengersForm);
   }
 
   createPassengersFormArray() {
@@ -58,6 +64,6 @@ export class PassengersFormComponent implements OnInit {
   }
 
   get passengers() {
-    return this.passengersForm.get('passengers')['controls'] as FormArray;
+    return this.passengersForm.get('passengers') as FormArray;
   }
 }

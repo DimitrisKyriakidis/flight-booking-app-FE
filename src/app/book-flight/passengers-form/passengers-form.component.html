@@ -2,7 +2,7 @@
   <form [formGroup]="passengersForm" class="flex flex-col items-center gap-5">
     <div formArrayName="passengers" class="space-y-5">
       <div
-        *ngFor="let element of passengers; let i = index"
+        *ngFor="let element of passengers?.controls; let i = index"
         [formGroupName]="i"
       >
         <fieldset class="border border-primary p-8">

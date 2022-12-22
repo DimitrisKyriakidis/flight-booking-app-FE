@@ -84,8 +84,8 @@
   </ol>
 </nav>
 
-<mat-stepper linear="false" #stepper>
-  <mat-step [stepControl]="step1.passengersForm" editable="true">
+<mat-stepper linear="true" #stepper>
+  <mat-step [stepControl]="step1.passengersForm" editable="false">
     <ng-template matStepLabel>Passengers Form</ng-template>
 
     <app-passengers-form #step1></app-passengers-form>
@@ -127,6 +127,7 @@
         Submit
       </button>
     </div>
+    <div class="h-24"></div>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
