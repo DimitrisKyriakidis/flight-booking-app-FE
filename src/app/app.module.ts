@@ -21,8 +21,6 @@ import { FlightsEffects } from './Store/flights-store/flights.effects';
 
 import { LoginService } from './services/login.service';
 import { FlightService } from './services/flightService';
-import { BreadcrumbModule } from 'xng-breadcrumb';
-import { BreadcrumbService } from 'xng-breadcrumb';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,7 +30,6 @@ import { BreadcrumbService } from 'xng-breadcrumb';
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
-    BreadcrumbModule,
     HttpClientModule,
     MatSnackBarModule,
     StoreModule.forRoot({ login: loginReducer, flights: flightsReducer }),
@@ -43,7 +40,7 @@ import { BreadcrumbService } from 'xng-breadcrumb';
 
     EffectsModule.forRoot([LoginEffects, FlightsEffects]),
   ],
-  providers: [FlightService, BreadcrumbService],
+  providers: [FlightService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

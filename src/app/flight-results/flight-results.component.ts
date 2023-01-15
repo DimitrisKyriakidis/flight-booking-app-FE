@@ -70,11 +70,6 @@ export class FlightResultsComponent implements OnInit, AfterViewInit {
     });
   }
   goToBookFlight(id, price) {
-    console.log(this.filters['from']);
-    //  this.router.navigate(['/home-page/flight-results/', this.filters['from'],this.filters['to'],this.filters['dateFrom'],this.filters['dateTo'],this.filters['seatType'],this.filters['passengers']]);
-    // this.router.navigate([
-    //   `/home-page/flight-results/${this.filters['from']}/${this.filters['to']}/${this.filters['dateFrom']}/${this.filters['dateTo']}/${this.filters['seatType']}/${this.filters['passengers']}/book-flight`,
-    // ]);
     this.router.navigateByUrl(
       `/book-flight/${id}/${this.filters['from']}/${this.filters['to']}/${this.filters['dateFrom']}/${this.filters['dateTo']}/${this.filters['seatType']}/${this.filters['passengers']}/${price}`
     );

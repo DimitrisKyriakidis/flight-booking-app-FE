@@ -5,7 +5,7 @@ import { AngularMaterialModule } from 'src/app/shared/modules/angular-material.m
 import { SharedModule } from 'src/app/shared/modules/shared.module';
 import { FilterFormComponent } from '../filter-form/filter-form.component';
 import { FlightResultsComponent } from '../flight-results/flight-results.component';
-import { BreadcrumbModule } from 'xng-breadcrumb';
+
 import { HomePageComponent } from './home-page.component';
 
 const routes = [
@@ -30,7 +30,6 @@ const routes = [
     AngularMaterialModule,
     RouterModule.forChild(routes),
     SharedModule,
-    BreadcrumbModule,
   ],
   exports: [RouterModule],
   providers: [DatePipe],

@@ -50,8 +50,6 @@ export class PassengersFormComponent implements OnInit {
     for (let i = 1; i < this.filters['passengers']; i++) {
       this.passengers.push(this.createPassengersFormArray());
     }
-
-    console.log('initialForm=', this.passengersForm);
   }
 
   createPassengersFormArray() {

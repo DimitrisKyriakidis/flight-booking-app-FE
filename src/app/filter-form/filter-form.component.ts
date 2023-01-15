@@ -79,7 +79,7 @@ export class FilterFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  departureDatesFilter = (d: Date): any => {
+  departureDatesFilter = (d: Date) => {
     let dateFromData;
     this.allFlights.pipe(takeUntil(this.unsubscribe$)).subscribe((data) => {
       dateFromData = data?.dateFrom;
